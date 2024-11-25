@@ -1,0 +1,16 @@
+h1 {
+    color: red;
+}
+
+* {
+    text-align: center;
+    margin: auto;
+}
+
+.test{
+    flex-direction: row;
+}
+
+.fenetre {
+    flex-direction:column;
+}
