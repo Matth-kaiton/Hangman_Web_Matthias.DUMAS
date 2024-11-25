@@ -48,9 +48,13 @@ button,input{
     justify-content: space-around;
     align-items: space-around;
     margin: top 50px;
+    height: 80%;
 }
 
 .gif{
+    width: 70%;
+    height: 100%;
+    border-radius: 25px;
 }
 
 .selec {
@@ -83,8 +87,21 @@ button,input{
 
 .difficulty:has(#Facile:hover) .gif {
     background-image: url(/picture/no\ \(facile\).gif);
-    width: 70%;
+    background-repeat:no-repeat;
+    background-position: center center;
 
+}
+
+.difficulty:has(#Moyen:hover) .gif {
+    background-image: url(/picture/Empero\ is\ please\ moyen.gif);
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+
+.difficulty:has(#Difficile:hover) .gif {
+    background-image: url(/picture/only\ war\ \(difficile\).gif);
+    background-repeat:no-repeat;
+    background-position: center center;
 }
 
 img {
