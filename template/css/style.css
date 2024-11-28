@@ -30,17 +30,6 @@ h3 {
     
 }
 
-.button{
-    margin: auto ;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5%;
-}
-
-button,input{
-    width: 150px;
-}
 
 .difficulty{
     display: flex;
@@ -49,12 +38,14 @@ button,input{
     align-items: space-around;
     margin: top 50px;
     height: 80%;
+    padding-right: 5%;
 }
 
 .gif{
     width: 70%;
     height: 100%;
-    border-radius: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .selec {
@@ -66,8 +57,24 @@ button,input{
 }
 
 .selec_button {
-    width: 80px;
-    margin: 10px;
+    width: 100px;
+    margin: 10%;
+    border-radius: 15px;
+    border: 0px;
+    border-bottom: solid 5px;
+    border-color: gray;
+    background-color: white;
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10%;
+}
+
+.selec_button:active{
+    transform: translateY(5px);
+    border: none;
+    margin-bottom: 13%;
+
 }
 
 .fenetre {
@@ -86,23 +93,24 @@ button,input{
 }
 
 .difficulty:has(#Facile:hover) .gif {
-    background-image: url(/picture/no\ \(facile\).gif);
+    background-image: url(../picture/no\ \(facile\).gif);
     background-repeat:no-repeat;
     background-position: center center;
-
+    background-size: contain;
 }
 
 .difficulty:has(#Moyen:hover) .gif {
-    background-image: url(/picture/Empero\ is\ please\ moyen.gif);
+    background-image: url(../picture/Empero\ is\ please\ moyen.gif);
     background-repeat:no-repeat;
     background-position: center center;
 }
 
 .difficulty:has(#Difficile:hover) .gif {
-    background-image: url(/picture/only\ war\ \(difficile\).gif);
+    background-image: url(../picture/only\ war\ \(difficile\).gif);
     background-repeat:no-repeat;
     background-position: center center;
-}
+    background-size: contain;
+}   
 
 img {
     border-radius: 25px;

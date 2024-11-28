@@ -7,12 +7,13 @@ import (
 	"unicode"
 )
 
-type saveH struct {
-	word       string
-	wordToFind []string
+type SaveH struct {
+	Word       string
+	WordToFind []string
 	PV         int
-	isStart    bool
-	used       []string
+	IsStart    bool
+	Used       []string
+	message    string
 }
 
 func Play(s string, o []string) {
@@ -24,12 +25,12 @@ func Play(s string, o []string) {
 	win := false
 	var use bool
 
-	var save *saveH = &saveH{
-		word:       s,
-		wordToFind: o,
+	var save *SaveH = &SaveH{
+		Word:       s,
+		WordToFind: o,
 		PV:         10,
-		isStart:    true,
-		used:       make([]string, 0),
+		IsStart:    true,
+		Used:       make([]string, 0),
 	}
 
 	hangMan := ReadHangman()
@@ -40,23 +41,23 @@ func Play(s string, o []string) {
 		isInWord = false
 		use = false
 
-		if save.isStart {
+		if save.IsStart {
 
 			fmt.Println("\nVous pouvez quitter le jeu a tous moment en écrivant STOP")
 
 			fmt.Println("\n")
 
 			fmt.Println("Good Luck, you have", save.PV, "attempts.\n")
-			for i := 0; i < len(save.wordToFind); i++ {
-				fmt.Print(save.wordToFind[i] + " ")
-				if save.wordToFind[i] != "_" {
-					save.used = append(save.used, save.wordToFind[i])
-					save.used = append(save.used, strings.ToLower(save.wordToFind[i]))
+			for i := 0; i < len(save.WordToFind); i++ {
+				fmt.Print(save.WordToFind[i] + " ")
+				if save.WordToFind[i] != "_" {
+					save.Used = append(save.Used, save.WordToFind[i])
+					save.Used = append(save.Used, strings.ToLower(save.WordToFind[i]))
 				}
 			}
 			ShowAsci(o)
 			fmt.Println("\n")
-			save.isStart = false
+			save.IsStart = false
 		}
 
 		fmt.Print("Choose : ")
@@ -67,7 +68,7 @@ func Play(s string, o []string) {
 				fmt.Println("Le partie à été sauvegarder vous aller quitter le jeu dans", i, "seconde")
 				time.Sleep(1000 * time.Millisecond)
 			}
-			SaveQuit(save.word, save.wordToFind, save.PV, save.isStart, save.used, "save.txt")
+			SaveQuit(save.Word, save.WordToFind, save.PV, save.IsStart, save.Used, "save.txt")
 			break
 
 		}
@@ -83,7 +84,7 @@ func Play(s string, o []string) {
 
 			if lettre[0] >= 'a' && lettre[0] <= 'z' {
 				lettre[0] -= 32
-				for _, i := range save.used {
+				for _, i := range save.Used {
 					if i == input {
 						use = true
 						fmt.Println("Cette lettre a déja été utilisé")
@@ -91,15 +92,15 @@ func Play(s string, o []string) {
 					}
 				}
 				if !use {
-					save.used = append(save.used, input)
-					save.used = append(save.used, strings.ToLower(input))
+					save.Used = append(save.Used, input)
+					save.Used = append(save.Used, strings.ToLower(input))
 				} else {
 					continue
 				}
 
-				for i := 0; i < len(save.word); i++ {
-					if string(lettre[0]) == string(save.word[i]) {
-						save.wordToFind[i] = string(save.word[i])
+				for i := 0; i < len(save.Word); i++ {
+					if string(lettre[0]) == string(save.Word[i]) {
+						save.WordToFind[i] = string(save.Word[i])
 						isInWord = true
 					}
 				}
@@ -113,7 +114,7 @@ func Play(s string, o []string) {
 			}
 
 		} else if len(input) > 1 && !digit && !symbol {
-			for _, i := range save.used {
+			for _, i := range save.Used {
 				if i == input {
 					use = true
 					fmt.Println("Ce mot a déja été utilisé")
@@ -121,14 +122,14 @@ func Play(s string, o []string) {
 				}
 			}
 			if !use {
-				save.used = append(save.used, input)
+				save.Used = append(save.Used, input)
 			} else {
 				continue
 			}
 
-			if strings.ToUpper(input) == save.word {
-				for i := 0; i < len(save.word); i++ {
-					save.wordToFind[i] = string(save.word[i])
+			if strings.ToUpper(input) == save.Word {
+				for i := 0; i < len(save.Word); i++ {
+					save.WordToFind[i] = string(save.Word[i])
 				}
 				ShowAsci(o)
 			} else {
@@ -148,9 +149,9 @@ func Play(s string, o []string) {
 
 		}
 
-		for i := 0; i < len(save.word); i++ {
-			if save.wordToFind[i] == string(save.word[i]) {
-				if i == len(save.word)-1 {
+		for i := 0; i < len(save.Word); i++ {
+			if save.WordToFind[i] == string(save.Word[i]) {
+				if i == len(save.Word)-1 {
 					win = true
 				}
 			} else {

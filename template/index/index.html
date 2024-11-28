@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Document</title>
 </head>
 <header>
@@ -13,8 +13,7 @@
     <div class="all">
         <div class="test">
             <div class="fenetre">
-                <!--affichage de l'image du pendu-->
-                <img src="/picture/Black-Templar-Army-2-1.jpg" alt="">
+                <img src="../picture/Black-Templar-Army-2-1.jpg" alt="">
             </div>
             <div class="fenetre">
                 <h3>Sélectionner votre difficulté</h3>
@@ -23,16 +22,12 @@
                         <img class="change" src="" alt="">
                     </div>
                     <div class="selec">
-                        <button class="selec_button" id="Facile">Facile</button>
-                        <button class="selec_button" id="Moyen">Moyen</button>
-                        <button class="selec_button" id="Difficile">Difficile</button>
+                        <a href="/hangman?level=facile" class="selec_button" id="Facile">Facile</a>
+                       <a href="/hangman?level=moyen" class="selec_button" id="Moyen">Moyen</a>
+                       <a href="/hangman?level=difficile" class="selec_button" id="Difficile">Difficile</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="button">
-            <input type="text" name="Taper votre lettre" placeholder="Entré la lettre">
-            <button>Valider</button>
         </div>
     </div>
 </body>
