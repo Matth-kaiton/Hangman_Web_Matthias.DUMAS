@@ -22,14 +22,24 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-var CurrentGame = hangman.SaveH{}
+var CurrentGame = hangman.SaveH{
+	PV: 10,
+}
 
 func Game(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Query().Get("level") != "" {
 		CurrentGame.Word = strings.ToUpper(hangman.ReadFile(r.URL.Query().Get("level")))
 		CurrentGame.WordToFind = hangman.ScliceWord(CurrentGame.Word)
-		//hangman.Play(CurrentGame.Word, CurrentGame.WordToFind)
+
+	}
+
+	r.ParseForm()
+	CurrentGame.Used = append(CurrentGame.Used, r.Form.Get("letter"))
+	CurrentGame.Input = r.Form.Get("lettre")
+
+	if CurrentGame.Input != "" {
+		CurrentGame = hangman.Play(CurrentGame)
 	}
 
 	tmpl, err := template.ParseFiles("../template/index/hangman.html")
