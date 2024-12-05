@@ -134,7 +134,7 @@ func Play(C SaveH) SaveH {
 			C.Message += " Ce n'est pas le bon mot, "
 			C.Message += strconv.Itoa(C.PV)
 			C.Message += " vie restante"
-			C.HangPosition = "/template/picture/" + strconv.Itoa(C.PV) + ".png"
+			C.HangPosition = "../picture/" + strconv.Itoa(C.PV) + ".jpg"
 		}
 
 	} else if digit && symbol {
