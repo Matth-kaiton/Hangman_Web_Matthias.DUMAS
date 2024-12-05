@@ -9,13 +9,14 @@ import (
 )
 
 type SaveH struct {
-	Word       string
-	WordToFind []string
-	PV         int
-	IsStart    bool
-	Input      string
-	Used       []string
-	Message    string
+	Word         string
+	WordToFind   []string
+	PV           int
+	IsStart      bool
+	Input        string
+	Used         []string
+	Message      string
+	HangPosition string
 }
 
 func Play(C SaveH) SaveH {
@@ -34,8 +35,6 @@ func Play(C SaveH) SaveH {
 	// 	IsStart:    C.IsStart,
 	// 	Used:       C.Used,
 	// }
-
-	hangMan := ReadHangman()
 
 	digit = false
 	symbol = false
@@ -107,7 +106,8 @@ func Play(C SaveH) SaveH {
 				C.Message += " n'est pas présent dans le mot, "
 				C.Message += strconv.Itoa(C.PV)
 				C.Message += " vie restante"
-				fmt.Println(hangMan[9-C.PV])
+				C.HangPosition = "../picture/" + strconv.Itoa(C.PV) + ".jpg"
+				fmt.Println(C.HangPosition)
 			}
 		}
 
@@ -134,7 +134,7 @@ func Play(C SaveH) SaveH {
 			C.Message += " Ce n'est pas le bon mot, "
 			C.Message += strconv.Itoa(C.PV)
 			C.Message += " vie restante"
-			fmt.Println(hangMan[9-C.PV])
+			C.HangPosition = "/template/picture/" + strconv.Itoa(C.PV) + ".png"
 		}
 
 	} else if digit && symbol {
