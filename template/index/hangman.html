@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/hangStyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="all">
+        <div class="test">
+            <div class="fenetre">
+                <h2>trouver le mot</h2>
+                <img src="{{.HangPosition}}" alt="">
+                <h2>{{.WordToFind}}</h2>
+            </div>
+            <div class="fenetre">
+                 <div class="button">
+                    <form action="/hangman" method="post">
+                        <h3>{{.Message}}</h3>
+                        <input type="text" name="lettre" placeholder="Entré la lettre" autofocus>
+                        <input type="submit" value="Valider"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

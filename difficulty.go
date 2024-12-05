@@ -17,25 +17,23 @@ func Diff() int {
 
 	i, _ = strconv.Atoi(o)
 
-	if i >= 1 && i <= 3 {
-		switch i {
-		case 1:
-			fmt.Print("Tu as choisi facile\n")
-			return i
+	switch i {
+	case 1:
+		fmt.Print("Tu as choisi facile\n")
+		return i
 
-		case 2:
-			fmt.Print("Tu as choisi moyen\n")
-			return i
+	case 2:
+		fmt.Print("Tu as choisi moyen\n")
+		return i
 
-		case 3:
-			fmt.Print("Tu as choisi difficile\n")
-			return i
-		}
-	} else {
-		fmt.Print("La dificulté n'existe pas ou vous n'avez pas rentré le bon caractère\n")
-		return Diff()
+	case 3:
+		fmt.Print("Tu as choisi difficile\n")
+		return i
 
+	default:
+		fmt.Print("La difficulter n'exite pas")
 	}
+
 	return 0
 
 }

@@ -6,17 +6,17 @@ import (
 	"os"
 )
 
-func ReadFile(r int) string {
+func ReadFile(r string) string {
 	var liste string
 	var listeMot []string
 	var positionMot int
 
 	switch r {
-	case 1:
+	case "facile":
 		liste = "words1.txt"
-	case 2:
+	case "moyen":
 		liste = "words2.txt"
-	case 3:
+	case "difficile":
 		liste = "words3.txt"
 
 	}
