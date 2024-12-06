@@ -53,6 +53,26 @@ func Game(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
+	if CurrentGame.PV == 0 {
+		http.HandleFunc("/finish", Finish)
+	}
+
+}
+
+func Finish(w http.ResponseWriter, r *http.Request) {
+
+	tmpl, err := template.ParseFiles("../template/index/finish.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var i interface {
+	}
+	err = tmpl.Execute(w, i)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func main() {
@@ -63,6 +83,7 @@ func main() {
 
 	http.HandleFunc("/", index)
 	http.HandleFunc("/hangman", Game)
+	http.HandleFunc("/finish", Finish)
 
 	http.ListenAndServe(":8080", nil)
 }
