@@ -8,6 +8,10 @@ import (
 	"strings"
 )
 
+var CurrentGame = hangman.SaveH{
+	PV: 10,
+}
+
 func index(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("../template/index/index.html")
 	if err != nil {
@@ -20,10 +24,6 @@ func index(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-var CurrentGame = hangman.SaveH{
-	PV: 10,
 }
 
 func Game(w http.ResponseWriter, r *http.Request) {
@@ -42,6 +42,12 @@ func Game(w http.ResponseWriter, r *http.Request) {
 		CurrentGame = hangman.Play(CurrentGame)
 	}
 
+	if CurrentGame.PV == 0 {
+		http.Redirect(w, r, "/finishLose", http.StatusSeeOther)
+	} else if CurrentGame.Message == "Vous avez gagné bien joué !!!" {
+		http.Redirect(w, r, "/finishWin", http.StatusSeeOther)
+	}
+
 	tmpl, err := template.ParseFiles("../template/index/hangman.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -53,15 +59,11 @@ func Game(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	if CurrentGame.PV == 0 {
-		http.HandleFunc("/finish", Finish)
-	}
-
 }
 
-func Finish(w http.ResponseWriter, r *http.Request) {
+func FinishLose(w http.ResponseWriter, r *http.Request) {
 
-	tmpl, err := template.ParseFiles("../template/index/finish.html")
+	tmpl, err := template.ParseFiles("../template/index/finishLose.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -71,8 +73,25 @@ func Finish(w http.ResponseWriter, r *http.Request) {
 	}
 	err = tmpl.Execute(w, i)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusAccepted)
 	}
+}
+
+func FinishWin(w http.ResponseWriter, r *http.Request) {
+
+	tmpl, err := template.ParseFiles("../template/index/finishWin.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var i interface {
+	}
+	err = tmpl.Execute(w, i)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusAccepted)
+	}
+
 }
 
 func main() {
@@ -83,7 +102,8 @@ func main() {
 
 	http.HandleFunc("/", index)
 	http.HandleFunc("/hangman", Game)
-	http.HandleFunc("/finish", Finish)
+	http.HandleFunc("/finishLose", FinishLose)
+	http.HandleFunc("/finishWin", FinishWin)
 
 	http.ListenAndServe(":8080", nil)
 }
