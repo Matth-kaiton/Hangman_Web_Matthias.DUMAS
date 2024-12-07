@@ -27,15 +27,6 @@ func Play(C SaveH) SaveH {
 	var use bool
 	var win bool
 
-	// var save *SaveH = &SaveH{
-	// 	Word:       C.Word,
-	// 	WordToFind: C.WordToFind,
-	// 	input:      C.Input,
-	// 	PV:         C.PV,
-	// 	IsStart:    C.IsStart,
-	// 	Used:       C.Used,
-	// }
-
 	digit = false
 	symbol = false
 	isInWord = false

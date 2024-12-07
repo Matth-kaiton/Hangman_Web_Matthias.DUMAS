@@ -96,7 +96,7 @@ h3 {
     background-image: url(../picture/no\ \(facile\).gif);
     background-repeat:no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
 }
 
 .difficulty:has(#Moyen:hover) .gif {
@@ -109,7 +109,7 @@ h3 {
     background-image: url(../picture/only\ war\ \(difficile\).gif);
     background-repeat:no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
 }   
 
 img {

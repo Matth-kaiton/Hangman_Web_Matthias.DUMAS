@@ -1,0 +1,27 @@
+body {
+    background-image: url(../picture/backgroudLose.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+div {
+   size: 50%; 
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+}
+
+img {
+    border-radius: 25px;
+    border: solid 5px black;
+}
+
+h1 {
+    background-color: red;
+    padding:10px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 25px;
+    border: solid 5px black;
+}
