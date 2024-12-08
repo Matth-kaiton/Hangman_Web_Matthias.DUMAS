@@ -13,6 +13,7 @@ var CurrentGame = hangman.SaveH{
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
+
 	tmpl, err := template.ParseFiles("../template/index/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -43,6 +44,7 @@ func Game(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if CurrentGame.PV == 0 {
+		CurrentGame.PV = 10
 		http.Redirect(w, r, "/finishLose", http.StatusSeeOther)
 	} else if CurrentGame.Message == "Vous avez gagné bien joué !!!" {
 		http.Redirect(w, r, "/finishWin", http.StatusSeeOther)
